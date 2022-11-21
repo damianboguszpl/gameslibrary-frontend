@@ -1,0 +1,40 @@
+@import '../../assets/scss/variables.scss';
+
+$space-between-items: 25px;
+
+.login {
+    .login__card {
+        padding: 30px;
+        border-radius: 8px;
+
+        .login__card__header {
+            margin-bottom: $space-between-items;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 2rem;
+            color: $aztec-gold;
+            text-shadow: 1px 1px $dutch-white;
+        }
+
+        .login__card__content {
+            display: flex;
+            flex-direction: column;
+
+            .login__content__input {
+                margin-bottom: $space-between-items;
+            }
+
+            .login__content__button {
+                color: $floral-white;
+                background-color: $burlywood;
+                margin-bottom: $space-between-items;
+                height: 50px;
+            }
+
+            .login__content__link {
+                color: black;
+                text-align: right;
+            }
+        }
+    }
+}

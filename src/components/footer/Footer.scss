@@ -1,0 +1,33 @@
+@import '../../assets/scss/variables.scss';
+
+.footer {
+    background-color: white !important;
+    margin-top: $navbar-footer-margin;
+
+    .footer__content {
+        color: black;
+
+        .footer__content__links {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .footer__content__copyright {
+            flex-grow: 1;
+        }
+
+        .footer__content__socials {
+            font-size: 2.3rem;
+
+            // grid
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 50px 50px 50px;
+            gap: 2rem;
+
+            a {
+                color: black;
+            }
+        }
+    }
+}

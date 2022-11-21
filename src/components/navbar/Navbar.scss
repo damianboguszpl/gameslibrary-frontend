@@ -1,0 +1,16 @@
+@import '../../assets/scss/variables.scss';
+
+.navbar {
+    background-color: white !important;
+    margin-bottom: $navbar-footer-margin;
+
+    .navbar__content {
+        color: black;
+
+        .navbar__content__avatar {
+            background-color: $burlywood;
+            color: $floral-white;
+            font-weight: bold;
+        }
+    }
+}

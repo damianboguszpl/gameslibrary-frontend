@@ -1,0 +1,21 @@
+// resolutions
+@mixin tablet {
+    @media (max-width:768px) {
+        @content;
+    }
+}
+
+// content
+// @mixin navbar-link {
+//     // flex
+//     display: flex;
+//     align-items: center;
+
+//     // dimensions
+//     height: 100%;
+//     padding: 0 1rem;
+
+//     cursor: pointer;
+//     text-decoration: none;
+
+// }

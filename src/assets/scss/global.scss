@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+// this is example body image from pexels
+$background-image: '../images/body.jpg';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-right: 0 !important;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    // background
+    // background: url($background-image) no-repeat;
+    // background-size: cover;
+
+    // color
+    background-color: $floral-white;
+}

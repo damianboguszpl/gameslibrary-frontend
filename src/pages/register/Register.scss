@@ -1,0 +1,46 @@
+@import '../../assets/scss/variables.scss';
+
+$space-between-items: 25px;
+$error-color: #d32f2f;
+
+.register {
+    .register__card {
+        padding: 30px;
+        border-radius: 8px;
+
+        .register__card__header {
+            margin-bottom: $space-between-items;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 2rem;
+            color: $aztec-gold;
+            text-shadow: 1px 1px $dutch-white;
+        }
+
+        .register__card__content {
+            display: flex;
+            flex-direction: column;
+
+            .register__content__input {
+                margin-bottom: $space-between-items;
+            }
+
+            .register__content__button {
+                color: $floral-white;
+                background-color: $burlywood;
+                margin-bottom: $space-between-items;
+                height: 50px;
+            }
+
+            .register__content__link {
+                color: black;
+                text-align: right;
+            }
+
+            .register__content__radio-error {
+                color: $error-color;
+                margin-bottom: $space-between-items;
+            }
+        }
+    }
+}

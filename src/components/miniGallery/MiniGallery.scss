@@ -1,0 +1,31 @@
+@import '../../assets/scss/variables.scss';
+
+$box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+
+.mini-gallery {
+    margin: $navbar-footer-margin 0;
+    box-shadow: $box-shadow;
+
+    .gallery__item {
+        min-height: 100%;
+        background-color: white;
+
+        // you can change the opacity or
+        box-shadow: $box-shadow;
+
+        img {
+            object-fit: contain;
+            height: 100%;
+        }
+    }
+
+    // I can change this button for a link
+    .mini-gallery__button {
+        background-color: white;
+    }
+}
+
+.mini-gallery--padding {
+    width: 85%;
+    margin: $navbar-footer-margin auto;
+}
