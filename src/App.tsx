@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthProvider';
 import PersistLogin from './PersistLogin'
 
 // import components
+import Navbar from './components/navbar/Navbar'
 import NotFound from './components/notFound/NotFound';
 
 // import pages
@@ -19,7 +20,7 @@ function App() {
     <AuthProvider >
       <div className="App">
         <Router>
-            {/* <Navbar /> */}
+            <Navbar />
             <Routes>
               <Route element={<PersistLogin />}>
                 <Route path='/' element={<Home />} />
