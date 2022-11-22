@@ -28,8 +28,11 @@ const PersistLogin = () => {
             }
         }
         // console.log("---aT: "+authState.accessToken)
+        // console.log("---aT: "+localStorage.getItem("accessToken"))
 
-        !authState?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+        // console.log(authState?.isLogged)
+        !authState?.isLogged ? verifyRefreshToken() : setIsLoading(false);
+        // !localStorage.getItem("accessToken") ? verifyRefreshToken() : setIsLoading(false);
 
         return () => isMounted = false;
     }, [])

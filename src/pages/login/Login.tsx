@@ -16,18 +16,25 @@ import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 // import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 // import useRefreshToken from "../../hooks/useRefreshToken";
+import { useNavigate } from "react-router-dom"
 
 function Login() {
+    const navigate = useNavigate();
 
     const context = useContext(AuthContext);
     // const [users, setUsers] = useState();
     // const axiosPrivate = useAxiosPrivate();
     // const refresh = useRefreshToken();
 
-    // useEffect(() => {
-    //     console.log(context?.authState);
-    //     // console.log("user: "+user)
-    // }, [])
+    useEffect(() => {                       // przekierowanie dla zalogowanego usera próbującego wejść na /login ; rozwiązanie tymczasowe
+        console.log("----login")
+        console.log(context?.authState);
+        if(context?.authState.isLogged) {
+            // navigate('/')
+            window.location.pathname = "/"
+        }
+        // console.log("user: "+user)
+    }, [context])
 
     const formik = useFormik({
         initialValues: {
@@ -38,21 +45,66 @@ function Login() {
         onSubmit: (values) => {
             axios.post("/auth/login", values,
                 {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    // withCredentials: true
                 }
             ).then((response) => {
-                window.location.href = "/"
+                // if(response.)
+                // console.log(response)
+                localStorage.setItem("accessToken", response.data.token)
+                axios.get(`/user/email/${values.email}`, {
+                    headers: { accessToken: localStorage.getItem("accessToken"),
+                    'Authorization' : `Bearer ${response.data.access_token}` },
+                })
+                .then((response2) => {
+                    if(response2?.data != null) {
+                        // console.log(response2.data)
+                        localStorage.setItem("accessToken", response.data.access_token)
+                        localStorage.setItem("refreshToken", response.data.refresh_token)
+                        context?.setAuthState(prev => {
+                            // console.log(JSON.stringify(prev));
+                            // console.log(response.data.accessToken);
+                            // console.log(response.data)
+                            return {
+                                ...prev,
+                                isLogged: true,
+                                accessToken: response.data.access_token,
+                                refreshToken: response.data.refresh_token,
+                                id: response2.data.id,
+                                email: response2.data.email,
+                                roles: response2.data.roles
+                                // firstname: response.data.user.firstname,
+                                // lastname: response.data.user.lastname,
+                                // roleId: response.data.RoleId
+                            }
+                        });
+                        setTimeout(() => {
+                            console.log(context?.authState)
+                        }, 600)
+                    }
+                });
+
+                // axios.get(`/user/`, {
+                //     headers: { 'Authorization' : `Bearer ${response.data.access_token}` },
+                // }).then( (response) => {
+                //     console.log(response)
+                // })
+
+                // window.location.pathname = "/"
+                // window.location.href = "/"
             }).catch(({ response }) => {
-                if (response.data?.error === 'Użytkownik nie istnieje')
-                    formik.setFieldError('email', response.data.error)
-                if (response.data?.error === 'Hasło jest niepoprawne')
-                    formik.setFieldError('password', response.data.error)
+                // if (response?.data?.error === 'Użytkownik nie istnieje')
+                //     formik.setFieldError('email', response.data.error)
+                // if (response?.data?.error === 'Hasło jest niepoprawne')
+                //     formik.setFieldError('password', response.data.error)
+                // else {
+                //     console.log("some error")
+                // }
+                formik.setFieldError('email', "Dane nie są poprawne")
+                formik.setFieldError('password', "Dane nie są poprawne")
             })
         }
     });
-    // it show context
-    // console.log(context?.authState)
 
     return (
         <Container maxWidth="sm" className='login'>

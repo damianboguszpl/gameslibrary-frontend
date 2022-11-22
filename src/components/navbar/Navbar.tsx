@@ -54,7 +54,7 @@ function Navbar() {
         { alt: 'Lista Zamówień', roleId: 3, Fun: function () { navigate('/order-list') } },
         { alt: 'Nowe Zamówienie', roleId: 3, Fun: function () { navigate('/new-order') } },
         // admin
-        { alt: 'Menu', roleId: 2, Fun: function () { navigate('/menu') } },
+        // { alt: 'Menu', roleId: 2, Fun: function () { navigate('/menu') } },
         { alt: 'Lista Zamówień', roleId: 2, Fun: function () { navigate('/order-list') } },
         { alt: 'Nowe Zamówienie', roleId: 2, Fun: function () { navigate('/new-order') } },
         { alt: 'Dashboard', roleId: 2, Fun: function () { navigate('/dashboard') } },
@@ -68,7 +68,23 @@ function Navbar() {
         { alt: 'Konto', logged: true, Fun: function () { navigate('/profile') } },
         {
             alt: 'Wyloguj się', logged: true, Fun: function () {
-                axios.get('/auth/logout');
+                // axios.get('/auth/logout');
+                context?.setAuthState(
+                    // console.log(JSON.stringify(prev));
+                    // console.log(response.data.accessToken);
+                    // console.log(response.data)
+                    {
+                        isLogged: false,
+                        accessToken: '',
+                        refreshToken: '',
+                        id: 0,
+                        email: '',
+                        roles: [{id: 0, name: ''}]
+                    }
+                );
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                
                 window.location.href = '/';
             }
         },
@@ -129,8 +145,9 @@ function Navbar() {
                                 display: { xs: 'block', md: 'none' },
                             }}>
                             {pages.map((page) => {
-                                if (page.roleId === context?.authState.roleId || (page.roleId === 1 && context?.authState.isLogged === false))
-                                    return (
+                                // if (page.roleId === context?.authState.roleId || (page.roleId === 1 && context?.authState.isLogged === false))
+                                if (context?.authState.roles.find(e => {return e.id === page.roleId}) || (page.roleId === 1 && context?.authState.isLogged === false))
+                                return (
                                         <MenuItem key={page.alt} onClick={() => { handleCloseNavMenu(); page.Fun() }}>
                                             <Typography textAlign="center">{page.alt}</Typography>
                                         </MenuItem>
@@ -160,7 +177,7 @@ function Navbar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => {
-                            if (page.roleId === context?.authState.roleId || (page.roleId === 1 && context?.authState.isLogged === false))
+                            if (context?.authState.roles.find(e => {return e.id === page.roleId}) || (page.roleId === 1 && context?.authState.isLogged === false))
                                 return (
                                     <Button
                                         key={page.alt}
@@ -175,11 +192,11 @@ function Navbar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Otwórz ustawienia">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                {context?.authState.isLogged ?
+                                {/* {context?.authState.isLogged ?
                                     <Avatar className='navbar__content__avatar' > {context.authState.firstname[0]}{context.authState.lastname[0]} </Avatar>
-                                    :
+                                    : */}
                                     <Avatar className='navbar__content__avatar' ><PersonIcon /></Avatar>
-                                }
+                                 {/* } */}
                             </IconButton>
                         </Tooltip>
                         <Menu

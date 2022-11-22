@@ -6,11 +6,10 @@ export const AuthProvider = ({ children }) => {
     const [authState, setAuthState] = useState({
         isLogged: false,
         accessToken: '',
+        refreshToken: '',
         id: 0,
-        firstname: '',
-        lastname: '',
         email: '',
-        roleId: 0
+        roles: [{id: '', name: ''}]
     });
 
     return (
