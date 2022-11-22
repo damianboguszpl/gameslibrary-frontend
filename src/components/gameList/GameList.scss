@@ -1,0 +1,21 @@
+.game_list {
+    .game_list__row {
+        // position: relative;
+
+        .game_list__row__image {}
+
+        .game_list__row__details {
+            position: relative;
+
+            .game_list__row__title {}
+
+            .game_list__row__description {}
+
+            .game_list__row__button {
+                position: absolute;
+                bottom: 0;
+                right: 50%;
+            }
+        }
+    }
+}
