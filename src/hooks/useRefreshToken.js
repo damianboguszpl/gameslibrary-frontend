@@ -20,7 +20,7 @@ const useRefreshToken = () => {
 
         const response = await axios.get('/auth/token/refresh', {
             withCredentials: false, // sending cookies with request
-            headers: { 'Authorization' : `Bearer ${localStorage.getItem("accessToken")}` }
+            headers: { 'Authorization' : `Bearer ${localStorage.getItem("refreshToken")}` }
         }).then((response) => {
 
             localStorage.setItem("accessToken", response.data.access_token)
@@ -48,30 +48,29 @@ const useRefreshToken = () => {
                 }
             });
 
-
-
             // localStorage.setItem("accessToken", response.data.access_token)
             // localStorage.setItem("refreshToken", response.data.refresh_token)
             return response.data.accessToken;
         }).catch(({ response }) => {
             // console.log(response.data.error_message)
             
-            context?.setAuthState(
-                // console.log(JSON.stringify(prev));
-                // console.log(response.data.accessToken);
-                // console.log(response.data)
-                {
-                    isLogged: false,
-                    accessToken: '',
-                    refreshToken: '',
-                    id: 0,
-                    email: '',
-                    roles: [{id: 0, name: ''}]
-                }
-            );
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            navigate('/login')
+            if(response?.data?.error_message.includes("The Token has expired")) {
+                // console.log("refreshToken expired... clearing context etc. ----------------")
+                context?.setAuthState(
+                    {
+                        isLogged: false,
+                        accessToken: '',
+                        refreshToken: '',
+                        id: 0,
+                        email: '',
+                        roles: [{id: 0, name: ''}]
+                    }
+                );
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                navigate('/login')
+            }
+            
             // window.location.pathname = "/"
             // return response.data.error_message
 

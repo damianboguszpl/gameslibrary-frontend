@@ -9,14 +9,13 @@ const useAxiosPrivate = () => {
     const context = useContext(AuthContext);
 
     useEffect(() => {
-        // console.log("context?.authState.accessToken:"+JSON.stringify(context?.authState.accessToken)+ "    isLogged:"+context?.authState.isLogged)
         const requestIntercept = axiosPrivate.interceptors.request.use(
             config => {
                 if (!config.headers['Authorization']) {
-                    if(localStorage.getItem("accessToken") !== null) {
-                        config.headers['Authorization'] = `Bearer ${localStorage.getItem("accessToken")}`;
-                    }
-                    // console.log(config.headers['Authorization'])
+                    config.headers['Authorization'] = `Bearer ${context?.authState.accessToken}`;
+                    // if(localStorage.getItem("accessToken") !== null) {
+                        // config.headers['Authorization'] = `Bearer ${localStorage.getItem("accessToken")}`;
+                    // }
                 }
                 return config;
             }, (error) => Promise.reject(error)

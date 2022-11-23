@@ -79,8 +79,25 @@ function Home() {
             })
             .then( (response3) => {
                 console.log("Data fetched for authorized user: ")
-                console.log(response3)
+                console.log(response3.data)
             })
+
+            // axiosPrivate.get(`/app`,{
+            //     withCredentials: false
+            // })
+            // .then( (response4) => {
+            //     console.log("App data fetched for authorized user: ")
+            //     console.log(response4.data)
+            // })
+
+            // axios.get(`/app`,{
+            //     withCredentials: false
+            // })
+            // .then( (response5) => {
+            //     console.log("zwykły axios response: ")
+            //     console.log(response5.data)
+            // })
+
         }
 
         return () => {
