@@ -1,20 +1,23 @@
 import * as Yup from "yup"
 
 export const RegisterValidationSchema = Yup.object({
-    firstname: Yup
+    // firstname: Yup
+    //     .string()
+    //     .required("Imię jest wymagane"),
+    // lastname: Yup
+    //     .string()
+    //     .required("Nazwisko jest wymagane"),
+    login: Yup
         .string()
-        .required("Imię jest wymagane"),
-    lastname: Yup
-        .string()
-        .required("Nazwisko jest wymagane"),
+        .required("Login jest wymagany"),
     email: Yup
         .string()
         .required("Email jest wymagany")
         .email("Wprowadź poprawny adres email"),
-    phoneNumber: Yup
-        .string()
-        .required("Numer telefonu jest wymagany")
-        .matches(/^[1-9][0-9]{8}$/, "Wpisz poprawny numer telefonu"),
+    // phoneNumber: Yup
+    //     .string()
+    //     .required("Numer telefonu jest wymagany")
+    //     .matches(/^[1-9][0-9]{8}$/, "Wpisz poprawny numer telefonu"),
     password: Yup
         .string()
         .required("Hasło jest wymagane")
@@ -24,8 +27,8 @@ export const RegisterValidationSchema = Yup.object({
         .required("Hasło jest wymagane")
         // check that password and repeatPassword are same
         .oneOf([Yup.ref('password')], "Hasło musi być identyczne"),
-    sex: Yup
-        .string()
-        // add 'Inne' if we use third radio
-        .required("Zaznaczenie jest wymagane").oneOf(["female", "male"])
+    // sex: Yup
+    //     .string()
+    //     // add 'Inne' if we use third radio
+    //     .required("Zaznaczenie jest wymagane").oneOf(["female", "male"])
 });

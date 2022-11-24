@@ -4,18 +4,12 @@ import {
     Button,
     Paper,
     Link,
-    Box,
-    RadioGroup,
-    Radio,
-    FormControlLabel,
-    FormLabel,
-    FormHelperText
+    Box
 } from "@mui/material";
 
 import { useFormik } from "formik"
 
 import { useNavigate } from 'react-router-dom'
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { RegisterValidationSchema } from "../../validations/RegisterValidationSchema";
 import './Register.scss'
 import axios from '../../api/axios.js';
@@ -23,55 +17,25 @@ import { RegisterInterface } from "../../interfaces/RegisterInterface";
 
 function Register(props: RegisterInterface) {
     const navigate = useNavigate();
-    const axiosPrivate = useAxiosPrivate();
 
     const formik = useFormik({
         initialValues: {
-            firstname: '',
-            lastname: '',
+            login: '',
             email: '',
-            phoneNumber: '',
             password: '',
             repeatPassword: '',
-            sex: ''
         },
         validationSchema: RegisterValidationSchema,
         onSubmit: (values) => {
-            // FIXME: errors handler
-            if (!props.isAdmin) {
-                axios.post("/users/register", values).then((response) => {
-                    navigate(`/login`)
+                axios.post("/user/register", values).then((response) => {
+                    if (response?.data?.code === 'USER_REGISTERED_SUCCESSFULLY')
+                        navigate(`/login`)
                 }).catch(({ response }) => {
-                    if (response.data?.error === 'Użytkownik z podanym adresem email już istnieje')
-                        formik.setFieldError('email', response.data.error)
-                    if (response.data?.error === 'Użytkownik z podanym numerem telefonu już istnieje')
-                        formik.setFieldError('phoneNumber', response.data.error)
+                    if (response?.data?.code === 'EMAIL_ALREADY_TAKEN')
+                        formik.setFieldError('email', response.data.message)
+                    if (response.data?.code === 'LOGIN_ALREADY_TAKEN')
+                        formik.setFieldError('login', response.data.message)
                 })
-            }
-            else {
-                const data = {
-                    firstname: values.firstname,
-                    lastname: values.lastname,
-                    email: values.email,
-                    password: values.password,
-                    phoneNumber: values.phoneNumber,
-                    sex: values.sex,
-                    RoleId: 3
-                }
-                const postEmployee = async () => {
-                    await axiosPrivate.post('/users', data).then((response) => {
-                        console.log(response.data)
-                        formik.resetForm();
-                    }).catch(({ response }) => {
-                        if (response.data?.error === 'Użytkownik z podanym adresem email już istnieje')
-                            formik.setFieldError('email', response.data.error)
-                        if (response.data?.error === 'Użytkownik z podanym numerem telefonu już istnieje')
-                            formik.setFieldError('phoneNumber', response.data.error)
-                    })
-
-                }
-                postEmployee();
-            }
         }
     });
 
@@ -85,26 +49,14 @@ function Register(props: RegisterInterface) {
                     <form onSubmit={formik.handleSubmit}>
                         <TextField className='register__content__input'
                             variant='outlined'
-                            label='Imię'
-                            fullWidth
-                            autoComplete='given-name'
-                            autoFocus
-                            name='firstname'
-                            value={formik.values.firstname}
-                            onChange={formik.handleChange}
-                            error={formik.touched.firstname && Boolean(formik.errors.firstname)}
-                            helperText={formik.touched.firstname && formik.errors.firstname}
-                        />
-                        <TextField className='register__content__input'
-                            variant='outlined'
-                            label='Nazwisko'
+                            label='Login'
                             fullWidth
                             autoComplete='family-name'
-                            name='lastname'
-                            value={formik.values.lastname}
+                            name='login'
+                            value={formik.values.login}
                             onChange={formik.handleChange}
-                            error={formik.touched.lastname && Boolean(formik.errors.lastname)}
-                            helperText={formik.touched.lastname && formik.errors.lastname}
+                            error={formik.touched.login && Boolean(formik.errors.login)}
+                            helperText={formik.touched.login && formik.errors.login}
                         />
                         <TextField className='register__content__input'
                             variant='outlined'
@@ -116,17 +68,6 @@ function Register(props: RegisterInterface) {
                             onChange={formik.handleChange}
                             error={formik.touched.email && Boolean(formik.errors.email)}
                             helperText={formik.touched.email && formik.errors.email}
-                        />
-                        <TextField className='register__content__input'
-                            variant='outlined'
-                            label='Numer telefonu'
-                            fullWidth
-                            autoComplete='tel-national'
-                            name='phoneNumber'
-                            value={formik.values.phoneNumber}
-                            onChange={formik.handleChange}
-                            error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
-                            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
                         />
                         <TextField className='register__content__input'
                             variant='outlined'
@@ -153,24 +94,6 @@ function Register(props: RegisterInterface) {
                             helperText={formik.touched.repeatPassword && formik.errors.repeatPassword}
 
                         />
-                        <FormLabel>Płeć</FormLabel>
-                        <RadioGroup className="register__content__radio"
-                            row
-                            name='sex'
-                            onChange={formik.handleChange}
-                            value={formik.values.sex}
-                        // error={formik.touched.sex && Boolean(formik.errors.sex)}
-                        // helperText={formik.touched.sex && formik.errors.sex}
-                        >
-                            <FormControlLabel value="female" control={<Radio />} label="Kobieta" />
-                            <FormControlLabel value="male" control={<Radio />} label="Mężczyzna" />
-                            {/* <FormControlLabel value="Inna" control={<Radio />} label="Inna" /> */}
-                        </RadioGroup>
-                        {(formik.touched.sex && Boolean(formik.errors.sex)) ?
-                            <FormHelperText className="register__content__radio-error">{formik.touched.sex && formik.errors.sex}</FormHelperText>
-                            :
-                            <FormHelperText className="register__content__radio-error"></FormHelperText>
-                        }
                         <Button className='register__content__button'
                             variant='contained'
                             fullWidth
