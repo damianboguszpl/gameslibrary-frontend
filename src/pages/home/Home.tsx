@@ -1,33 +1,11 @@
+import { Container } from '@mui/material'
+import GameList from '../../components/gameList/GameList'
 import './Home.scss'
-
-// components
-// import Carousel from '../../components/carousel/Carousel'
-// import MiniGallery from '../../components/miniGallery/MiniGallery'
-// import LoyaltyCard from '../../components/loyaltyCard/LoyaltyCard'
 
 import axios from '../../api/axios.js';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-
-// for test only
-const items = [
-    {
-        imageName: 'placeholder.png',
-        title: "title 1",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo minus repudiandae, vitae veritatis tempora a recusandae ea corrupti cupiditate! Labore molestiae placeat quis aperiam maxime dignissimos mollitia repellendus iste est.'
-    },
-    {
-        imageName: 'placeholder.png',
-        title: "title 2",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo minus repudiandae, vitae veritatis tempora a recusandae ea corrupti cupiditate! Labore molestiae placeat quis aperiam maxime dignissimos mollitia repellendus iste est.'
-    },
-    {
-        imageName: 'placeholder.png',
-        title: "title 3",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo minus repudiandae, vitae veritatis tempora a recusandae ea corrupti cupiditate! Labore molestiae placeat quis aperiam maxime dignissimos mollitia repellendus iste est.'
-    }
-]
 
 function Home() {
     const [users, setUsers] = useState();
@@ -49,11 +27,11 @@ function Home() {
 
                 await axios.get("/user", {
                     headers:
-                      { 'Authorization' : `Bearer ${context?.authState.accessToken}` }
-                  }).then((response2) => {
+                        { 'Authorization': `Bearer ${context?.authState.accessToken}` }
+                }).then((response2) => {
                     // console.log(response2);
                     isMounted && setUsers(response2.data);
-                  });
+                });
 
                 //   console.log("token: "+ context?.authState.accessToken)
 
@@ -73,14 +51,14 @@ function Home() {
         //     console.log("hmmm 3");
         // })
 
-        if(context?.authState.isLogged) {
-            axiosPrivate.get(`/user/`,{
+        if (context?.authState.isLogged) {
+            axiosPrivate.get(`/user/`, {
                 withCredentials: false
             })
-            .then( (response3) => {
-                console.log("Data fetched for authorized user: ")
-                console.log(response3.data)
-            })
+                .then((response3) => {
+                    console.log("Data fetched for authorized user: ")
+                    console.log(response3.data)
+                })
 
             // axiosPrivate.get(`/app`,{
             //     withCredentials: false
@@ -117,20 +95,9 @@ function Home() {
     }, [])
 
     return (
-        <main className='home'>
-            <div className='home__carousel'>
-                {/* <Carousel items={items} /> */}
-            </div>
-            <div className='home__popular'>
-                {/* <MiniGallery /> */}
-            </div>
-            <div className='home__loyalty'>
-                {/* <LoyaltyCard /> */}
-            </div>
-            <div>
-
-            </div>
-        </main>
+        <Container className='home'>
+            <GameList />
+        </Container>
     )
 }
 
