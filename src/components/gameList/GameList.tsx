@@ -5,8 +5,10 @@ import axios from '../../api/axios.js';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import './GameList.scss'
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from 'react-router-dom';
 
 function GameList() {
+    const navigate = useNavigate()
 
     const [apps, setApps] = useState<any[]>([])
     const [lastIndex, setLastIndexIndex] = useState(0)
@@ -37,7 +39,7 @@ function GameList() {
             loader={<h4>Loading...</h4>}>
             <Stack className='game_list' spacing={3}>
                 {apps?.map((value, key) =>
-                    <Paper className='game_list__row' key={key} elevation={3}>
+                    <Paper className='game_list__row' key={key} elevation={3} onClick={() => navigate(`/details/${value.id}`)}>
                         <img alt={value.title} src={value.screenshotLink} className='game_list__row__image' loading="lazy" />
                         <div className='game_list__row__details'>
                             <h1 className='game_list__row__title'>{value.title}</h1>
