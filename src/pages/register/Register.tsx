@@ -31,10 +31,15 @@ function Register(props: RegisterInterface) {
                     if (response?.data?.code === 'USER_REGISTERED_SUCCESSFULLY')
                         navigate(`/login`)
                 }).catch(({ response }) => {
+                    console.log(response.data)
                     if (response?.data?.code === 'EMAIL_ALREADY_TAKEN')
                         formik.setFieldError('email', response.data.message)
                     if (response.data?.code === 'LOGIN_ALREADY_TAKEN')
                         formik.setFieldError('login', response.data.message)
+                    if (response.data?.code === 'LOGIN_NOT_VALID')
+                        formik.setFieldError('login', response.data.message)
+                    if(response.data?.code === 'PASSWORD_NOT_VALID')
+                    formik.setFieldError('password', response.data.message)
                 })
         }
     });

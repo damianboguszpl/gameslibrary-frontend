@@ -9,7 +9,8 @@ export const RegisterValidationSchema = Yup.object({
     //     .required("Nazwisko jest wymagane"),
     login: Yup
         .string()
-        .required("Login jest wymagany"),
+        .required("Login jest wymagany")
+        .matches(/^[a-zA-Z0-9._-]{3,}$/, "Login może zawierać małe oraz wielki litery, cyfry, myślnik, podkreślnik, kropkę oraz musi składać się z co najmniej 3 znaków"),
     email: Yup
         .string()
         .required("Email jest wymagany")
