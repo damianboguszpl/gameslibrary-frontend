@@ -1,5 +1,5 @@
 import { Box, Container, Paper } from '@mui/material';
-import React, { Suspense, useEffect, useState, SuspenseList } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import axios from '../../api/axios.js';
 import './Details.scss';
