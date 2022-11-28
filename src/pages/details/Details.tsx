@@ -43,11 +43,11 @@ function Details() {
                 </Box>
                 <Box className='details__card__footer'>
                     <strong>
-                        publishers: {app?.publishers.map((publisher: string, key: number) => (key === 0 ? `${publisher}` : `, ${publisher}`))}
+                        Publishers: {app?.publishers.map((publisher: string, key: number) => (key === 0 ? `${publisher}` : `, ${publisher}`))}
                     </strong>
                     <br />
                     <strong>
-                        developers: {app?.developers.map((developer: string, key: number) => (key === 0 ? `${developer}` : `, ${developer}`))}
+                        Developers: {app?.developers.map((developer: string, key: number) => (key === 0 ? `${developer}` : `, ${developer}`))}
                     </strong>
                 </Box>
             </Paper>

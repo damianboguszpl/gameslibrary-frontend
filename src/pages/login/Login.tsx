@@ -72,6 +72,7 @@ function Login() {
                                 refreshToken: response.data.refresh_token,
                                 id: response2.data.id,
                                 email: response2.data.email,
+                                login: response2.data.login,
                                 roles: response2.data.roles
                                 // firstname: response.data.user.firstname,
                                 // lastname: response.data.user.lastname,

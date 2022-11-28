@@ -42,6 +42,7 @@ const useRefreshToken = () => {
                             refreshToken: response.data.refresh_token,
                             id: response.data.id,
                             email: response.data.email,
+                            login: response2.data.login,
                             roles: response2.data.roles
                         }
                     });
@@ -63,6 +64,7 @@ const useRefreshToken = () => {
                         refreshToken: '',
                         id: 0,
                         email: '',
+                        login: '',
                         roles: [{id: 0, name: ''}]
                     }
                 );

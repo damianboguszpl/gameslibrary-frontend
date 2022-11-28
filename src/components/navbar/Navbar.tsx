@@ -21,7 +21,7 @@ import MenuItem from '@mui/material/MenuItem';
 import PersonIcon from '@mui/icons-material/Person';
 
 // assets
-import logo from '../../assets/images/placeholder.png'
+import logo from '../../assets/images/logo.jpg'
 
 function Navbar() {
 
@@ -46,21 +46,19 @@ function Navbar() {
         setAnchorElUser(null);
     };
 
-    // TODO: max 3 links, change localizations others link
     const pages = [
-        // client
-        { alt: 'Menu', roleId: 1, Fun: function () { navigate('/menu') } },
+        // { alt: 'Menu', roleId: 1, Fun: function () { navigate('/') } },
+        { alt: 'Favourite Apps', roleId: 2, Fun: function () { navigate('/favourites') } },
         // employee
-        { alt: 'Lista Zamówień', roleId: 3, Fun: function () { navigate('/order-list') } },
-        { alt: 'Nowe Zamówienie', roleId: 3, Fun: function () { navigate('/new-order') } },
+        // { alt: 'Lista Zamówień', roleId: 3, Fun: function () { navigate('/order-list') } },
+        // { alt: 'Nowe Zamówienie', roleId: 3, Fun: function () { navigate('/new-order') } },
         // admin
-        // { alt: 'Menu', roleId: 2, Fun: function () { navigate('/menu') } },
-        { alt: 'Lista Zamówień', roleId: 2, Fun: function () { navigate('/order-list') } },
-        { alt: 'Nowe Zamówienie', roleId: 2, Fun: function () { navigate('/new-order') } },
-        { alt: 'Dashboard', roleId: 2, Fun: function () { navigate('/dashboard') } },
-        { alt: 'Nowy Produkt', roleId: 2, Fun: function () { navigate('/new-product') } },
-        { alt: 'Nowa Promocja', roleId: 2, Fun: function () { navigate('/new-special-offer') } },
-        { alt: 'Nowy Pracownik', roleId: 2, Fun: function () { navigate('/new-employee') } },
+        // { alt: 'Lista Zamówień', roleId: 2, Fun: function () { navigate('/order-list') } },
+        // { alt: 'Nowe Zamówienie', roleId: 2, Fun: function () { navigate('/new-order') } },
+        // { alt: 'Dashboard', roleId: 2, Fun: function () { navigate('/dashboard') } },
+        // { alt: 'Nowy Produkt', roleId: 2, Fun: function () { navigate('/new-product') } },
+        // { alt: 'Nowa Promocja', roleId: 2, Fun: function () { navigate('/new-special-offer') } },
+        // { alt: 'Nowy Pracownik', roleId: 2, Fun: function () { navigate('/new-employee') } },
     ];
 
     const settings = [
@@ -79,6 +77,7 @@ function Navbar() {
                         refreshToken: '',
                         id: 0,
                         email: '',
+                        login: '',
                         roles: [{ id: 0, name: '' }]
                     }
                 );
@@ -114,7 +113,7 @@ function Navbar() {
                             color: 'inherit',
                             textDecoration: 'none',
                         }}>
-                        LOGO
+                        Games Library
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -194,7 +193,7 @@ function Navbar() {
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 {context?.authState.isLogged ?
                                     // <Avatar className='navbar__content__avatar' > {context.authState.email[0]} </Avatar>
-                                    <span>{context.authState.email}</span>
+                                    <span>{context.authState.login}</span>
                                     :
                                     <Avatar className='navbar__content__avatar' ><PersonIcon /></Avatar>
                                 }

@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
         refreshToken: '',
         id: 0,
         email: '',
+        login: '',
         roles: [{id: '', name: ''}]
     });
 

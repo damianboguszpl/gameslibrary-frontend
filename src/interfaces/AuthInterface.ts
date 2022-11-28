@@ -4,5 +4,6 @@ export interface AuthInterface {
     refreshToken: string,
     id: number,
     email: string,
+    login: string,
     roles: [{id:number, name:string}]
 }

@@ -28,7 +28,7 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register isAdmin={false} />} />
-              <Route path='details/:id' element={<Details />} />
+              <Route path='/details/:id' element={<Details />} />
               <Route path='*' element={<NotFound />} />
             </Route>
           </Routes>
