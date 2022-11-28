@@ -148,10 +148,10 @@ function Login() {
                             Zaloguj się
                         </Button>
                     </form>
-                    <Link href="/reset-password" className='login__content__link'
+                    {/* <Link href="/reset-password" className='login__content__link'
                         underline='hover'>
                         Nie pamiętasz hasła?
-                    </Link>
+                    </Link> */}
                 </Box>
             </Paper>
         </Container>
