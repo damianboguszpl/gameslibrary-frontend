@@ -6,6 +6,7 @@ $space-between-items: 25px;
     .details__card {
         padding: 30px;
         border-radius: 8px;
+        position: relative;
 
         .details__card__header {
             margin-bottom: $space-between-items;
