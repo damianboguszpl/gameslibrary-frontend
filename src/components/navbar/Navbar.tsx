@@ -79,12 +79,12 @@ function Navbar() {
                         refreshToken: '',
                         id: 0,
                         email: '',
-                        roles: [{id: 0, name: ''}]
+                        roles: [{ id: 0, name: '' }]
                     }
                 );
                 localStorage.removeItem("accessToken");
                 localStorage.removeItem("refreshToken");
-                
+
                 window.location.href = '/';
             }
         },
@@ -146,8 +146,8 @@ function Navbar() {
                             }}>
                             {pages.map((page) => {
                                 // if (page.roleId === context?.authState.roleId || (page.roleId === 1 && context?.authState.isLogged === false))
-                                if (context?.authState.roles.find(e => {return e.id === page.roleId}) || (page.roleId === 1 && context?.authState.isLogged === false))
-                                return (
+                                if (context?.authState.roles.find(e => { return e.id === page.roleId }) || (page.roleId === 1 && context?.authState.isLogged === false))
+                                    return (
                                         <MenuItem key={page.alt} onClick={() => { handleCloseNavMenu(); page.Fun() }}>
                                             <Typography textAlign="center">{page.alt}</Typography>
                                         </MenuItem>
@@ -177,7 +177,7 @@ function Navbar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => {
-                            if (context?.authState.roles.find(e => {return e.id === page.roleId}) || (page.roleId === 1 && context?.authState.isLogged === false))
+                            if (context?.authState.roles.find(e => { return e.id === page.roleId }) || (page.roleId === 1 && context?.authState.isLogged === false))
                                 return (
                                     <Button
                                         key={page.alt}
@@ -192,11 +192,12 @@ function Navbar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Otwórz ustawienia">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                {/* {context?.authState.isLogged ?
-                                    <Avatar className='navbar__content__avatar' > {context.authState.firstname[0]}{context.authState.lastname[0]} </Avatar>
-                                    : */}
+                                {context?.authState.isLogged ?
+                                    // <Avatar className='navbar__content__avatar' > {context.authState.email[0]} </Avatar>
+                                    <span>{context.authState.email}</span>
+                                    :
                                     <Avatar className='navbar__content__avatar' ><PersonIcon /></Avatar>
-                                 {/* } */}
+                                }
                             </IconButton>
                         </Tooltip>
                         <Menu

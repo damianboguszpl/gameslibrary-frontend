@@ -1,0 +1,39 @@
+@import '../../assets/scss/variables.scss';
+
+$space-between-items: 25px;
+
+.details {
+    .details__card {
+        padding: 30px;
+        border-radius: 8px;
+
+        .details__card__header {
+            margin-bottom: $space-between-items;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 2rem;
+            color: $aztec-gold;
+            text-shadow: 1px 1px $dutch-white;
+        }
+
+        .details__card__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .content__image {}
+
+            .content__description {
+                margin-top: 25px;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        .details__card__footer {
+            margin-top: 25px;
+        }
+    }
+}
