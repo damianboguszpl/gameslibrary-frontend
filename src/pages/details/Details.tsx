@@ -1,11 +1,11 @@
 import { Box, Container, Paper } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import axios from '../../api/axios.js';
-import './Details.scss'
+import './Details.scss';
+const Favorites = React.lazy(() => import('../../components/favorites/Favorites'));
 
 function Details() {
-
     const navigate = useNavigate()
 
     const { id } = useParams()
@@ -28,6 +28,7 @@ function Details() {
     return (
         <Container maxWidth="md" className='details'>
             <Paper elevation={4} className='details__card'>
+                <Suspense fallback={'Loading...'}><Favorites app_id={app?.id} /></Suspense>
                 <Box className='details__card__header'>
                     {app?.title}
                 </Box>
