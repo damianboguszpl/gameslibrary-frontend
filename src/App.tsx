@@ -1,5 +1,5 @@
 import './assets/scss/global.scss'
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import logo from './logo.svg';
 
@@ -16,6 +16,7 @@ import Login from './pages/login/Login'
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
 import Details from './pages/details/Details';
+const FavList = React.lazy(() => import('./pages/favList/FavList'))
 
 function App() {
   return (
@@ -23,15 +24,18 @@ function App() {
       <div className="App">
         <Router>
           <Navbar />
-          <Routes>
-            <Route element={<PersistLogin />}>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register isAdmin={false} />} />
-              <Route path='/details/:id' element={<Details />} />
-              <Route path='*' element={<NotFound />} />
-            </Route>
-          </Routes>
+          <Suspense>
+            <Routes>
+              <Route element={<PersistLogin />}>
+                <Route path='/' element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register isAdmin={false} />} />
+                <Route path='/details/:id' element={<Details />} />
+                <Route path='/favourites' element={<FavList />} />
+                <Route path='*' element={<NotFound />} />
+              </Route>
+            </Routes>
+          </Suspense>
           <Footer />
         </Router>
       </div>
