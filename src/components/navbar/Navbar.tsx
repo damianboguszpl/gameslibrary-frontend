@@ -47,18 +47,12 @@ function Navbar() {
     };
 
     const pages = [
-        // { alt: 'Menu', roleId: 1, Fun: function () { navigate('/') } },
-        { alt: 'Favourite Apps', roleId: 2, Fun: function () { navigate('/favourites') } },
-        // employee
-        // { alt: 'Lista Zamówień', roleId: 3, Fun: function () { navigate('/order-list') } },
-        // { alt: 'Nowe Zamówienie', roleId: 3, Fun: function () { navigate('/new-order') } },
-        // admin
-        // { alt: 'Lista Zamówień', roleId: 2, Fun: function () { navigate('/order-list') } },
-        // { alt: 'Nowe Zamówienie', roleId: 2, Fun: function () { navigate('/new-order') } },
-        // { alt: 'Dashboard', roleId: 2, Fun: function () { navigate('/dashboard') } },
-        // { alt: 'Nowy Produkt', roleId: 2, Fun: function () { navigate('/new-product') } },
-        // { alt: 'Nowa Promocja', roleId: 2, Fun: function () { navigate('/new-special-offer') } },
-        // { alt: 'Nowy Pracownik', roleId: 2, Fun: function () { navigate('/new-employee') } },
+        // only for role user
+        { alt: 'Favourite Apps', roleId: 1, Fun: function () { navigate('/favourites') } },
+        { alt: 'All Appss', roleId: 1, Fun: function () { navigate('/') } },
+        { alt: 'Games', roleId: 1, Fun: function () { navigate('/', { state: { category: 'game' } }) } },
+        { alt: 'DLC', roleId: 1, Fun: function () { navigate('/', { state: { category: 'dlc' } }) } },
+        { alt: 'Others', roleId: 1, Fun: function () { navigate('/', { state: { category: 'other' } }) } },
     ];
 
     const settings = [
