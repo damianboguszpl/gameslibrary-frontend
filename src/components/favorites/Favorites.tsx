@@ -3,7 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { AuthContext } from '../../context/AuthContext'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
-import axios from '../../api/axios.js';
+// import axios from '../../api/axios.js';
 import './Favorites.scss'
 
 function Favorites(props: { app_id: number }) {
@@ -26,6 +26,7 @@ function Favorites(props: { app_id: number }) {
                 })
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.app_id, gameIsFav])
 
     const addFavorite = () => {

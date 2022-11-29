@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import './Footer.scss'
 
 // material UI
@@ -8,18 +8,18 @@ import {
     Container,
     Toolbar,
     Box,
-    Link,
-    Button
+    // Link,
+    // Button
 } from '@mui/material';
 
 
-const pages = [
+// const pages = [
     // { alt: 'Link1', href: '/link1' },
     // { alt: 'Link2', href: '/link2' },
-];
+// ];
 
 function Footer() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
         <AppBar position="static" className='footer'>

@@ -1,6 +1,6 @@
 import { Box, Container, Paper } from '@mui/material';
 import React, { Suspense, useEffect, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../../api/axios.js';
 import './Details.scss';
 const Favorites = React.lazy(() => import('../../components/favorites/Favorites'));
@@ -23,6 +23,7 @@ function Details() {
                 setApp(response.data)
             }
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

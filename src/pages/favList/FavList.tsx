@@ -1,5 +1,4 @@
 import { Stack, Paper } from '@mui/material'
-import { Console } from 'console'
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
@@ -17,6 +16,7 @@ function FavList() {
         axiosPrivate.get(`/favapp/user/${context?.authState.id}`, {
             withCredentials: false
         }).then((response) => { if (response.status === 200) setApps(response.data) })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context])
 
     return (
