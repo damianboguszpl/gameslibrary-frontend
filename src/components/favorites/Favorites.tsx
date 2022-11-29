@@ -14,14 +14,17 @@ function Favorites(props: { app_id: number }) {
     const [favGame, setFavGame] = useState<any | null>(null)
 
     useEffect(() => {
-        axiosPrivate.get(`/favapp/user/${context?.authState.id}/app/${props.app_id}`, {
-            withCredentials: false
-        }).then((response) => {
-            if (response.status === 200) {
-                setFavGame(response.data)
-                setGameIsFav(true)
-            }
-        })
+        if(props.app_id !== undefined) {
+            console.log(props.app_id, "-> defined")
+            axiosPrivate.get(`/favapp/user/${context?.authState.id}/app/${props.app_id}`, {
+                withCredentials: false
+            }).then((response) => {
+                if (response.status === 200) {
+                    setFavGame(response.data)
+                    setGameIsFav(true)
+                }
+            })
+        }
     }, [props.app_id])
 
     const addFavorite = () => {
