@@ -49,6 +49,7 @@ function Navbar() {
     const pages = [
         // { alt: 'Menu', roleId: 1, Fun: function () { navigate('/') } },
         { alt: 'Favourite Apps', roleId: 2, Fun: function () { navigate('/favourites') } },
+        { alt: 'Reviews', roleId: 2, Fun: function () { navigate('/reviews') } },
         // employee
         // { alt: 'Lista Zamówień', roleId: 3, Fun: function () { navigate('/order-list') } },
         // { alt: 'Nowe Zamówienie', roleId: 3, Fun: function () { navigate('/new-order') } },

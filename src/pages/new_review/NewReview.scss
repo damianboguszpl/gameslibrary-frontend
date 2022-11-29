@@ -1,0 +1,45 @@
+@import '../../assets/scss/variables.scss';
+
+$space-between-items: 25px;
+
+.new_review {
+    .new_review__card {
+        padding: 30px;
+        border-radius: 8px;
+
+        .new_review__card__header {
+            margin-bottom: $space-between-items;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 2rem;
+            color: $aztec-gold;
+            text-shadow: 1px 1px $dutch-white;
+        }
+
+        .new_review__card__header_app_title {
+            margin-bottom: $space-between-items;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1rem;
+            color: $dutch-white;
+            text-shadow: 1px 1px $dutch-white;
+        }
+
+        .new_review__card__content {
+            display: flex;
+            flex-direction: column;
+
+            .new_review__content__input {
+                margin-bottom: $space-between-items;
+                flex-grow: 1;
+            }
+
+            .new_review__content__button {
+                color: $floral-white;
+                background-color: $burlywood;
+                margin-bottom: $space-between-items;
+                height: 50px;
+            }
+        }
+    }
+}

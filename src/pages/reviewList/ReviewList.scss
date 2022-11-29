@@ -1,0 +1,45 @@
+@import '../../assets/scss/mixins.scss';
+
+.review_list {
+    .review_list__row {
+        display: flex;
+        padding: 20px;
+
+        @include tablet {
+            flex-direction: column-reverse;
+        }
+
+        .review_list__row__image {}
+
+        .review_list__row__details {
+            margin-left: 30px;
+
+            @include tablet {
+                margin-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .review_list__row__title {
+                margin-bottom: 15px;
+            }
+
+            .review_list__row__description {}
+
+            .edit_review__button {
+                margin-bottom: 1em;
+            }
+            .delete_review__button {
+
+            }
+
+            .review_list_row_rating {
+                margin-bottom: 1em;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+            transition: 0.2s;
+        }
+    }
+}
