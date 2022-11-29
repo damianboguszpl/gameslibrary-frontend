@@ -15,7 +15,6 @@ function Favorites(props: { app_id: number }) {
 
     useEffect(() => {
         if(props.app_id !== undefined) {
-            console.log(props.app_id, "-> defined")
             axiosPrivate.get(`/favapp/user/${context?.authState.id}/app/${props.app_id}`, {
                 withCredentials: false
             }).then((response) => {
