@@ -25,7 +25,7 @@ function Favorites(props: { app_id: number }) {
                 }
             })
         }
-    }, [props.app_id])
+    }, [props.app_id, gameIsFav])
 
     const addFavorite = () => {
         const data = {
