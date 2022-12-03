@@ -9,11 +9,14 @@ import './NewReview.scss'
 import { useFormik } from "formik"
 import { NewReviewValidationSchema } from "../../validations/NewReviewValidationSchema";
 import axios from '../../api/axios.js';
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useParams } from 'react-router-dom'
+
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 function NewReview() {
     const { id } = useParams()
@@ -23,6 +26,16 @@ function NewReview() {
     const context = useContext(AuthContext);
     const axiosPrivate = useAxiosPrivate();
     const [refresh, setRefresh] = useState(false)
+
+    const [open, setOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("")
+    const [isAlertSuccess, setIsAlertSuccess] = useState(true);
+    const showAlert = () => { setOpen(true); };
+
+    const closeAlert = function (_event: any, reason: string) {
+        if (reason === 'clickaway') return;
+        setOpen(false);
+    };
 
     useEffect(() => {
         axios.get(`/app/${id}`).then((response) => {
@@ -41,8 +54,6 @@ function NewReview() {
 
     const formik = useFormik({
         initialValues: {
-            // appId: null,
-            // userId: null,
             textReview: "",
             rating: 1
         },
@@ -62,12 +73,25 @@ function NewReview() {
                     await axiosPrivate.post('/review', data, {
                         withCredentials: false
                     }).then((response) => {
-                        // console.log(response)
-                        alert(response.data.message)
+                        setIsAlertSuccess(true)
+                        setAlertMessage("New Review added!")
+                        showAlert()
+                        if(response.data.code === "NEW_REVIEW_CREATED") {
+                            setTimeout(() => {
+                                navigate(`/details/${id}`)
+                            },6100)
+                        }
+
                     }).catch(({ response }) => {
-                        // console.log(response.data)
                         if(response.status !== 201) {
-                            alert(response.data.message)
+                            setIsAlertSuccess(false)
+                            setAlertMessage(response.data.message)
+                            showAlert()
+                            if(response.data.code === "REVIEW_ALREADY_EXISTS") {
+                                setTimeout(() => {
+                                    navigate(`/details/${id}`)
+                                },6100)
+                            }
                         }
                     });
                 }
@@ -83,18 +107,13 @@ function NewReview() {
         }
     });
 
-    // const [open, setOpen] = useState(false);
-
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
     return (
         <Container maxWidth="sm" className='new_review'>
+            <Snackbar open={open} autoHideDuration={6000} onClose={closeAlert}>
+                <Alert severity={isAlertSuccess ? 'success' : 'error'} sx={{ width: '100%' }}>
+                    {alertMessage}
+                </Alert>
+            </Snackbar>
             <Paper elevation={4} className='new_review__card'>
                 <Box className='new_review__card__header'>
                     Add new Review
