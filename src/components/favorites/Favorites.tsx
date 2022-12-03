@@ -6,12 +6,25 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 // import axios from '../../api/axios.js';
 import './Favorites.scss'
 
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 function Favorites(props: { app_id: number }) {
     const axiosPrivate = useAxiosPrivate()
     const context = useContext(AuthContext)
 
     const [gameIsFav, setGameIsFav] = useState(false)
     const [favGame, setFavGame] = useState<any | null>(null)
+
+    const [open, setOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("")
+    const [isAlertSuccess, setIsAlertSuccess] = useState(true);
+    const showAlert = () => { setOpen(true); };
+
+    const closeAlert = function (_event: any, reason: string) {
+        if (reason === 'clickaway') return;
+        setOpen(false);
+    };
 
     useEffect(() => {
         if(context?.authState.isLogged) {
@@ -37,7 +50,12 @@ function Favorites(props: { app_id: number }) {
             }
             axiosPrivate.post('/favapp', data, {
                 withCredentials: false
-            }).then((response) => setGameIsFav(true))
+            }).then((response) => {
+                setGameIsFav(true)
+                setIsAlertSuccess(true)
+                setAlertMessage("Added to Favourites.")
+                showAlert()
+            })
         }
     }
 
@@ -46,13 +64,23 @@ function Favorites(props: { app_id: number }) {
             if (favGame !== null) {
                 axiosPrivate.delete(`favapp/${favGame.id}`, {
                     withCredentials: false
-                }).then((response) => setGameIsFav(false))
+                }).then((response) => {
+                    setGameIsFav(false)
+                    setIsAlertSuccess(false)
+                    setAlertMessage("Removed from Favourites.")
+                    showAlert()
+                })
             }
         }
     }
 
     return (
         <div className='favourites'>
+            <Snackbar open={open} autoHideDuration={6000} onClose={closeAlert}>
+                <Alert severity={isAlertSuccess ? 'success' : 'error'} sx={{ width: '100%' }}>
+                    {alertMessage}
+                </Alert>
+            </Snackbar>
             {gameIsFav ?
                 <FavoriteIcon fontSize='inherit' onClick={() => removeFavorite()} />
                 :
