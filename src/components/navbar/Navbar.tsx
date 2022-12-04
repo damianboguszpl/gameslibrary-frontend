@@ -47,7 +47,7 @@ function Navbar() {
     };
 
     const pages = [
-        { alt: 'Reviews', roleId: 1, Fun: function () { navigate('/reviews') } },
+        { alt: 'My reviews', roleId: 1, Fun: function () { navigate('/reviews') } },
         { alt: 'Favourite Apps', roleId: 1, Fun: function () { navigate('/favourites') } },
         { alt: 'All Appss', roleId: 1, Fun: function () { navigate('/') } },
         { alt: 'Games', roleId: 1, Fun: function () { navigate('/', { state: { category: 'game' } }) } },
