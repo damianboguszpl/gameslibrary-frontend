@@ -81,8 +81,8 @@ function Navbar() {
             }
         },
         // logout settings
-        { alt: 'Zaloguj się', logged: false, Fun: function () { navigate('/login') } },
-        { alt: 'Rejestracja', logged: false, Fun: function () { navigate('/register') } },
+        { alt: 'Login', logged: false, Fun: function () { navigate('/login') } },
+        { alt: 'Register', logged: false, Fun: function () { navigate('/register') } },
     ];
 
     return (
