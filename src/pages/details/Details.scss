@@ -8,11 +8,11 @@ $space-between-items: 25px;
         border-radius: 8px;
         position: relative;
 
-        .add_review__button{
+        .add_review__button {
             color: $floral-white;
-                background-color: $burlywood;
-                margin-bottom: $space-between-items;
-                height: 30px;
+            background-color: $burlywood;
+            margin-bottom: $space-between-items;
+            height: 30px;
         }
 
         .details__card__header {
@@ -43,5 +43,9 @@ $space-between-items: 25px;
         .details__card__footer {
             margin-top: 25px;
         }
+    }
+
+    .details__card--top_margin {
+        margin-top: 5rem;
     }
 }
