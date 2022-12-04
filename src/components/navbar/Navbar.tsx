@@ -57,9 +57,8 @@ function Navbar() {
 
     const settings = [
         // logged settings
-        { alt: 'Konto', logged: true, Fun: function () { navigate('/profile') } },
         {
-            alt: 'Wyloguj się', logged: true, Fun: function () {
+            alt: 'Logout', logged: true, Fun: function () {
                 // axios.get('/auth/logout');
                 context?.setAuthState(
                     // console.log(JSON.stringify(prev));
