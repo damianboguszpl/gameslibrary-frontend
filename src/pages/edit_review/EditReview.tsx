@@ -39,7 +39,7 @@ function EditReview() {
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
-    console.log(review)
+
     const formik = useFormik({
         initialValues: {
             textReview: '',
@@ -57,12 +57,13 @@ function EditReview() {
                 }
                 // console.log(data)
 
-                const postProduct = async () => {
+                const putReview = async () => {
                     await axiosPrivate.put(`/review/${id}`, data, {
                         withCredentials: false
                     }).then((response) => {
                         // console.log(response)
-                        alert(response.data.message)
+                        // alert(response.data.message)
+                        navigate('/reviews')
                     }).catch(({ response }) => {
                         // console.log(response.data)
                         if (response.status !== 201) {
@@ -70,7 +71,7 @@ function EditReview() {
                         }
                     });
                 }
-                postProduct();
+                putReview();
                 setTimeout(() => {
                     (refresh ? setRefresh(false) : setRefresh(true))
                 }, 50)
@@ -142,7 +143,7 @@ function EditReview() {
                             variant='contained'
                             fullWidth
                             type='submit'>
-                            dodaj
+                            edit
                         </Button>
                     </form>
                 </Box>
