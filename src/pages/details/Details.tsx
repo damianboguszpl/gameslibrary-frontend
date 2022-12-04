@@ -82,27 +82,29 @@ function Details() {
                     </strong>
                 </Box>
             </Paper>
-            <Paper className='details__card details__card--top_margin'>
-                <Box className='details__card__header'>
-                    Recenzje
-                </Box>
-                <Stack className='review_list' spacing={3}>
-                    {allReviews?.map((value, key) =>
-                        <Paper className='review_list__row' key={key} elevation={3} >
-                            <img alt={value.app.title} src={value.app.screenshotLink} className='review_list__row__image' loading="lazy" onClick={() => navigate(`/details/${value.app.id}`)} />
-                            <div className='review_list__row__details'>
-                                <h1 className='review_list__row__title' onClick={() => navigate(`/details/${value.app.id}`)}>{value.app.title}</h1>
-                                <div>
-                                    <p className='review_list_row_rating'><strong>User: </strong>{value.user.login}</p>
-                                    <p className='review_list_row_rating'><strong>Rating: </strong>{value.rating}</p>
-                                    <strong>Text Review: </strong>
-                                    <p className='review_list_row_text_review'>{value.textReview}</p>
+            {allReviews.length > 0 ?
+                <Paper className='details__card details__card--top_margin'>
+                    <Box className='details__card__header'>
+                        Recenzje
+                    </Box>
+                    <Stack className='review_list' spacing={3}>
+                        {allReviews?.map((value, key) =>
+                            <Paper className='review_list__row' key={key} elevation={3} >
+                                <img alt={value.app.title} src={value.app.screenshotLink} className='review_list__row__image' loading="lazy" onClick={() => navigate(`/details/${value.app.id}`)} />
+                                <div className='review_list__row__details'>
+                                    <h1 className='review_list__row__title' onClick={() => navigate(`/details/${value.app.id}`)}>{value.app.title}</h1>
+                                    <div>
+                                        <p className='review_list_row_rating'><strong>User: </strong>{value.user.login}</p>
+                                        <p className='review_list_row_rating'><strong>Rating: </strong>{value.rating}</p>
+                                        <strong>Text Review: </strong>
+                                        <p className='review_list_row_text_review'>{value.textReview}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </Paper>
-                    )}
-                </Stack>
-            </Paper>
+                            </Paper>
+                        )}
+                    </Stack>
+                </Paper>
+                : ''}
         </Container>
     )
 }
