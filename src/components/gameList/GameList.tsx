@@ -18,7 +18,6 @@ function GameList() {
     const [apiUrl, setApiUrl] = useState('/app')
 
     const selectCategory = () => {
-        // FIXME sometimes not work, and has 200ms delay
         setTimeout(() => {
             if (location?.state?.category === 'game') setApiUrl('/app/type/game')
             else if (location?.state?.category === 'dlc') setApiUrl('/app/type/dlc')
