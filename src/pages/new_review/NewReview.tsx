@@ -59,7 +59,7 @@ function NewReview() {
         },
         validationSchema: NewReviewValidationSchema,
         onSubmit: (values) => {
-            if(context?.authState.isLogged) {
+            if (context?.authState.isLogged) {
                 const data = {
                     appId: id,
                     // userId: context?.authState.id,
@@ -68,7 +68,7 @@ function NewReview() {
                     rating: values.rating
                 }
                 // console.log(data)
-    
+
                 const postReview = async () => {
                     await axiosPrivate.post('/review', data, {
                         withCredentials: false
@@ -76,21 +76,21 @@ function NewReview() {
                         setIsAlertSuccess(true)
                         setAlertMessage("New Review added!")
                         showAlert()
-                        if(response.data.code === "NEW_REVIEW_CREATED") {
-                            setTimeout(() => {
-                                navigate(`/details/${id}`)
-                            },6100)
-                        }
+                        // if(response.data.code === "NEW_REVIEW_CREATED") {
+                        setTimeout(() => {
+                            navigate(`/details/${id}`)
+                        }, 3000)
+                        // }
 
                     }).catch(({ response }) => {
-                        if(response.status !== 201) {
+                        if (response.status !== 201) {
                             setIsAlertSuccess(false)
                             setAlertMessage(response.data.message)
                             showAlert()
-                            if(response.data.code === "REVIEW_ALREADY_EXISTS") {
+                            if (response.data.code === "REVIEW_ALREADY_EXISTS") {
                                 setTimeout(() => {
                                     navigate(`/details/${id}`)
-                                },6100)
+                                }, 6100)
                             }
                         }
                     });
@@ -137,11 +137,11 @@ function NewReview() {
                                 helperText={formik.touched.rating && formik.errors.rating}
                                 type="number"
                                 InputProps={{
-                                    inputProps: { 
-                                        max: 5, min: 1 
+                                    inputProps: {
+                                        max: 5, min: 1
                                     }
                                 }}
-                                >
+                            >
                             </TextField>
                         </div>
                         <TextField className='new_review__content__input'
