@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import './ReviewList.scss'
 
-function FavList() {
+function ReviewList() {
     const navigate = useNavigate()
     const context = useContext(AuthContext)
     const axiosPrivate = useAxiosPrivate()
@@ -16,7 +16,10 @@ function FavList() {
     useEffect(() => {
         axiosPrivate.get(`/review/user/${context?.authState.id}`, {
             withCredentials: false
-        }).then((response) => { if (response.status === 200) setReviews(response.data) })
+        }).then((response) => {
+            if (response.status === 200) setReviews(response.data)
+            else setReviews([])
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context, refresh])
 
@@ -29,7 +32,6 @@ function FavList() {
                     (refresh ? setRefresh(false) : setRefresh(true))
                 }, 50)
             })
-
         }
     }
 
@@ -73,4 +75,4 @@ function FavList() {
     )
 }
 
-export default FavList
+export default ReviewList
