@@ -32,22 +32,22 @@ function EditReview() {
                 navigate('/')
             }
             else {
-                console.log(response.data)
                 setReview(response.data)
-                console.log(review)
+                formik.values.textReview = response.data.textReview
+                formik.values.rating = response.data.rating
             }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
-
+    console.log(review)
     const formik = useFormik({
         initialValues: {
-            textReview: review?.textReview,
-            rating: review?.rating
+            textReview: '',
+            rating: 0
         },
         validationSchema: NewReviewValidationSchema,
         onSubmit: (values) => {
-            if(context?.authState.isLogged) {
+            if (context?.authState.isLogged) {
                 const data = {
                     appId: id,
                     // userId: context?.authState.id,
@@ -56,7 +56,7 @@ function EditReview() {
                     rating: values.rating
                 }
                 // console.log(data)
-    
+
                 const postProduct = async () => {
                     await axiosPrivate.put(`/review/${id}`, data, {
                         withCredentials: false
@@ -65,7 +65,7 @@ function EditReview() {
                         alert(response.data.message)
                     }).catch(({ response }) => {
                         // console.log(response.data)
-                        if(response.status !== 201) {
+                        if (response.status !== 201) {
                             alert(response.data.message)
                         }
                     });
@@ -117,11 +117,11 @@ function EditReview() {
                                 // helperText={formik.touched.rating && formik.errors.rating}
                                 type="number"
                                 InputProps={{
-                                    inputProps: { 
-                                        max: 5, min: 1 
+                                    inputProps: {
+                                        max: 5, min: 1
                                     }
                                 }}
-                                >
+                            >
                             </TextField>
                         </div>
                         <TextField className='edit_review__content__input'
