@@ -49,7 +49,7 @@ function FavList() {
                             </div>
                         </div>
                         <div className='review_list__row__details'>
-                            <Button className='edit_review__button'
+                            <Button className='review__button'
                                 variant='contained'
                                 fullWidth
                                 onClick={() => {
@@ -58,7 +58,7 @@ function FavList() {
                             >
                                 Edit
                             </Button>
-                            <Button className='delete_review__button'
+                            <Button className='review__button'
                                 variant='contained'
                                 fullWidth
                                 onClick={() => deleteReview(value.id)}

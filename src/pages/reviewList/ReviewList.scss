@@ -1,4 +1,5 @@
 @import '../../assets/scss/mixins.scss';
+@import '../../assets/scss/variables.scss';
 
 .review_list {
     .review_list__row {
@@ -25,11 +26,11 @@
 
             .review_list__row__description {}
 
-            .edit_review__button {
+            .review__button {
+                color: $floral-white;
+                background-color: $burlywood;
                 margin-bottom: 1em;
-            }
-            .delete_review__button {
-
+                height: 30px;
             }
 
             .review_list_row_rating {
