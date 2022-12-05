@@ -23,7 +23,7 @@ function GameList() {
             else if (location?.state?.category === 'dlc') setApiUrl('/app/type/dlc')
             else if (location?.state?.category === 'other') setApiUrl('/app/type/other')
             else setApiUrl('/app')
-        }, 200)
+        }, 500)
     }
 
     useEffect(() => {

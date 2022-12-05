@@ -47,9 +47,9 @@ function Navbar() {
     };
 
     const pages = [
-        { alt: 'My reviews', roleId: 1, Fun: function () { navigate('/reviews') } },
-        { alt: 'Favourite Apps', roleId: 1, Fun: function () { navigate('/favourites') } },
-        { alt: 'All Appss', roleId: 1, Fun: function () { navigate('/') } },
+        { alt: 'My reviews', roleId: 2, Fun: function () { navigate('/reviews') } },
+        { alt: 'Favourite Apps', roleId: 2, Fun: function () { navigate('/favourites') } },
+        { alt: 'All Apps', roleId: 1, Fun: function () { navigate('/') } },
         { alt: 'Games', roleId: 1, Fun: function () { navigate('/', { state: { category: 'game' } }) } },
         { alt: 'DLC', roleId: 1, Fun: function () { navigate('/', { state: { category: 'dlc' } }) } },
         { alt: 'Others', roleId: 1, Fun: function () { navigate('/', { state: { category: 'other' } }) } },

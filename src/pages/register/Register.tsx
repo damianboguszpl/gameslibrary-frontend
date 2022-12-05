@@ -28,7 +28,7 @@ function Register(props: RegisterInterface) {
         validationSchema: RegisterValidationSchema,
         onSubmit: (values) => {
                 axios.post("/user/register", values).then((response) => {
-                    if (response?.data?.code === 'USER_REGISTERED_SUCCESSFULLY')
+                    if (response?.data?.code === 'NEW_USER_REGISTERED')
                         navigate(`/login`)
                 }).catch(({ response }) => {
                     console.log(response.data)
