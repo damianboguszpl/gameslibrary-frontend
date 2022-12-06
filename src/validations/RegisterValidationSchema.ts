@@ -1,35 +1,21 @@
 import * as Yup from "yup"
 
 export const RegisterValidationSchema = Yup.object({
-    // firstname: Yup
-    //     .string()
-    //     .required("Imię jest wymagane"),
-    // lastname: Yup
-    //     .string()
-    //     .required("Nazwisko jest wymagane"),
     login: Yup
         .string()
-        .required("Login jest wymagany")
-        .matches(/^[a-zA-Z0-9._-]{3,}$/, "Login może zawierać małe oraz wielki litery, cyfry, myślnik, podkreślnik, kropkę oraz musi składać się z co najmniej 3 znaków"),
+        .required("Login is required")
+        .matches(/^[a-zA-Z0-9._-]{3,}$/, "Login should be 3 letter length"),
     email: Yup
         .string()
-        .required("Email jest wymagany")
-        .email("Wprowadź poprawny adres email"),
-    // phoneNumber: Yup
-    //     .string()
-    //     .required("Numer telefonu jest wymagany")
-    //     .matches(/^[1-9][0-9]{8}$/, "Wpisz poprawny numer telefonu"),
+        .required("Email is required")
+        .email("Enter a valid email"),
     password: Yup
         .string()
-        .required("Hasło jest wymagane")
-        .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, "Hasło musi zawierać znak specjalny, cyfrę, wielką i małą literę oraz minimum 8 znaków"),
+        .required("Password is required")
+        .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, "Login should contain Uppercase letter, lowercase letter, number and special character, length min 8"),
     repeatPassword: Yup
         .string()
-        .required("Hasło jest wymagane")
+        .required("Password is required")
         // check that password and repeatPassword are same
-        .oneOf([Yup.ref('password')], "Hasło musi być identyczne"),
-    // sex: Yup
-    //     .string()
-    //     // add 'Inne' if we use third radio
-    //     .required("Zaznaczenie jest wymagane").oneOf(["female", "male"])
+        .oneOf([Yup.ref('password')], "Password isn't same"),
 });
