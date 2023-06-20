@@ -19,7 +19,7 @@ An additional function is to create a list of the user's favorite applications.
 
 ### Division of work
 
-#### Together:
+#### Joint work:
 * Server application:
     - database modeling
     - preparing API for frontend app
